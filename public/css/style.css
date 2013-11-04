@@ -24,3 +24,12 @@ ul {
     top: 1px;
     left: 1px;
 }
+
+.splash-page {
+    background-color: darkgray;
+}
+
+.splash-center {
+    margin-top: 100px;
+    text-align: center;
+}

@@ -4,16 +4,26 @@
  * Time: 4:51 PM
  */
 
+var RocknCoder = RocknCoder || {};
 
 (function () {
   "use strict";
 
-  var context;
+  var context,
+    sounds = [
+      "sounds/83560__nbs-dark__ship-fire.wav",
+      "sounds/95078__sandyrb__the-crash.wav",
+      "sounds/143611__d-w__weapons-synth-blast-01.wav",
+      "sounds/DST-Afternoon.mp3"
+    ],
+    bufferLoader;
+
   try {
     // Fix up for prefixing
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     context = new AudioContext();
     console.log('Web Audio API is supported in this browser');
+    bufferLoader = new BufferLoader(context, sounds, finishedLoading);
   }
   catch (e) {
     console.log('Web Audio API is NOT supported in this browser');
@@ -52,9 +62,20 @@
     // note: on older systems, may have to use deprecated noteOn(time);
   }
 
-  loadDogSound("audios/95078__sandyrb__the-crash.wav");
+  function finishedLoading(bufferList) {
+    debugger;
+    // Create two sources and play them both together.
+    var source1 = context.createBufferSource();
+    var source2 = context.createBufferSource();
+    source1.buffer = bufferList[0];
+    source2.buffer = bufferList[1];
 
+    source1.connect(context.destination);
+    source2.connect(context.destination);
+    source1.start(0);
+    source2.start(0);
+  }
 
-
+  loadDogSound("sounds/95078__sandyrb__the-crash.wav");
 
 }());

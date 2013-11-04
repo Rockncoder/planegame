@@ -1,7 +1,7 @@
 
 <!-- splash screen -->
-<div id="splash" data-role="page" data-rnc-jspage="splash">
-  <div>1942!</div>
+<div id="splash" data-role="page" data-rnc-jspage="splash" class="splash-page">
+  <h1 class="splash-center">the Plane Game</h1>
 </div>
 <!-- attract screen -->
 <div id="attract" data-role="page" data-rnc-jspage="attract" data-theme="e">
@@ -11,16 +11,25 @@
     <li><a href="#highScores" data-role="button">High Scores</a></li>
     <li><a href="#credits" data-role="button">Credits</a></li>
   </ul>
-  <audio controls preload loop>
-    <source src="audios/DST-Afternoon.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-  </audio>
+  <!--<audio controls preload loop>-->
+    <!--<source src="audios/DST-Afternoon.mp3" type="audio/mp3">-->
+    <!--Your browser does not support the audio element.-->
+  <!--</audio>-->
 </div>
 <!-- play screen -->
 <div id="play" data-role="page" data-rnc-jspage="play" data-theme="a">
+  <!-- the actual size of the canvas game grid is set by JS -->
   <canvas id="grid" width="300" height="300" style="position: relative;">
     <strong>[Your browser can not show this example.]</strong>
   </canvas>
+  <!-- this is the score and life information at the top of the page -->
+  <div class="game-info">
+    <span>1000</span>
+  </div>
+  <!-- this is the info that appears at the beginning and end of each level -->
+  <div class="level-info">
+    <span>Level One</span>
+  </div>
 </div>
 <!-- high scores screen -->
 <div id="highScores" data-role="page" data-rnc-jspage="info" data-theme="e">
