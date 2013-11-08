@@ -255,11 +255,11 @@ var RocknCoder = RocknCoder || {};
     player = RocknCoder.SpriteMap.gunShip;
 
     /*
-    *  the game is playable by touch or mouse
-    *  we clear the event first to ensure that we are double handling it
-    *
-    * */
-     $(window).off('click touchstart').on('click touchstart', function (event) {
+     *  the game is playable by touch or mouse
+     *  we clear the event first to ensure that we are double handling it
+     *
+     * */
+    $(window).off('click touchstart').on('click touchstart', function (event) {
       var bulletName = "playerBullet" + bullet,
         x = event.pageX,
         y = event.pageY;
