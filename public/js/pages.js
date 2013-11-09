@@ -16,7 +16,7 @@ var RocknCoder = RocknCoder || {};
       pageshow: function () {
         RocknCoder.Game.dims = RocknCoder.Dimensions.get();
 
-        var context, loaderReady,
+        var loaderReady,
           timerReady = $.Deferred(),
           imageReady = $.Deferred(),
           sounds = [
@@ -32,8 +32,10 @@ var RocknCoder = RocknCoder || {};
           RocknCoder.context = new AudioContext();
           console.log('Web Audio API is supported in this browser');
           loaderReady = RocknCoder.loadAudioFiles(RocknCoder.context, sounds);
+          RocknCoder.hasAudio = true;
         }
         catch (e) {
+          RocknCoder.hasAudio = false;
           console.log('Web Audio API is NOT supported in this browser');
         }
 
@@ -124,4 +126,3 @@ var RocknCoder = RocknCoder || {};
     };
   }());
 }());
-

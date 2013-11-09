@@ -18,6 +18,8 @@ var RocknCoder = RocknCoder || {};
 
 
   RocknCoder.playSoundFx = function(bufferIndex) {
-    RocknCoder.playAudio(RocknCoder.context, RocknCoder.Resources.audios[bufferIndex]);
+    if(RocknCoder.hasAudio){
+      RocknCoder.playAudio(RocknCoder.context, RocknCoder.Resources.audios[bufferIndex]);
+    }
   };
 }());
