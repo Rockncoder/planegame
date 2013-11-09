@@ -14,7 +14,7 @@ var RocknCoder = RocknCoder || {};
    The loadAudioFiles method uses jQuery deferred object,
    but not its ajax loader since it doesn't support binary data (arraybuffer)
    once it has loaded all of the audio files, it will resolve() itself and
-   pass the audio data to the done method
+   pass the audio data to the done method.v
    */
   RocknCoder.loadAudioFiles = function(context, urlList) {
     var myDeferred = $.Deferred(),
