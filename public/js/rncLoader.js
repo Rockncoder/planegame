@@ -18,7 +18,6 @@ var RocknCoder = RocknCoder || {};
    */
   RocknCoder.loadAudioFiles = function(context, urlList) {
     var myDeferred = $.Deferred(),
-      count = 0,
       len = urlList.length,
       bufferList = [],
       loadBuffer = function (urls, index) {
@@ -50,13 +49,14 @@ var RocknCoder = RocknCoder || {};
         }
         // if there is some kind of loading error come here
         request.onerror = function () {
-          myDeferred.reject();
+          myDeferred.reject('unknown error occurred');
         }
 
+        // begin the download
         request.send();
       };
 
-    loadBuffer(urlList, count);
+    loadBuffer(urlList, 0);
     return myDeferred;
   };
 }());

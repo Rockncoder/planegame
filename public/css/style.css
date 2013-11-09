@@ -33,3 +33,44 @@ ul {
     margin-top: 100px;
     text-align: center;
 }
+
+.game-screen {
+    position: relative;
+}
+
+.game-info {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.game-info > div {
+    width: 20%;
+    text-align: right;
+    margin: 2px 4px;
+}
+
+.game-toast {
+    position: absolute;
+    top: 200px;
+    z-index: 100;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+#lives {
+    float: left;
+    text-align: left;
+
+}
+
+#score {
+    margin: 2px auto;
+}
+
+#level {
+    float: right;
+}

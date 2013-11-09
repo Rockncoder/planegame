@@ -15,4 +15,9 @@ var RocknCoder = RocknCoder || {};
     source.connect(context.destination);       // connect the source to the context's destination (the speakers)
     source.start(0);                           // play the source now
   };
+
+
+  RocknCoder.playSoundFx = function(bufferIndex) {
+    RocknCoder.playAudio(RocknCoder.context, RocknCoder.Resources.audios[bufferIndex]);
+  };
 }());

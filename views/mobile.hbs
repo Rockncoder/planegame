@@ -18,12 +18,19 @@
 <!-- play screen -->
 <div id="play" data-role="page" data-rnc-jspage="play" data-theme="a">
   <!-- the actual size of the canvas game grid is set by JS -->
-  <canvas id="grid" width="300" height="300" style="position: relative;">
-    <strong>[Your browser can not show this example.]</strong>
-  </canvas>
-  <!-- this is the score and life information at the top of the page -->
-  <div class="game-info">
-    <span>1000</span>
+  <div class="game-screen">
+    <canvas id="grid" width="300" height="300" style="position: relative;">
+      <strong>[Your browser can not show this example.]</strong>
+    </canvas>
+    <!-- this is the score and life information at the top of the page -->
+    <div class="game-info">
+      <div id="lives" class="left">0</div>
+      <div id="level" class="right">0</div>
+      <div id="score" class="center">0</div>
+    </div>
+    <!--<div class="game-toast">-->
+      <!--<span id="toast">Get Ready!</span>-->
+    <!--</div>-->
   </div>
   <!-- this is the info that appears at the beginning and end of each level -->
   <div class="level-info">
@@ -41,7 +48,7 @@
 <div id="credits" data-role="page" data-rnc-jspage="info" data-theme="e">
   <br/>
   <ul data-role="listview">
-    <li data-role="list-divider"><span>JQM Game</span></li>
+    <li data-role="list-divider"><span>The Plane Game</span></li>
     <li>
       <span>Designed and developed by</span><br/>
       <span>the RocknCoder</span><br/>

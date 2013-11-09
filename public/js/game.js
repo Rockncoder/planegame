@@ -9,6 +9,27 @@ var RocknCoder = RocknCoder || {};
 (function () {
   "use strict";
 
+  var $score = $("#score"),
+    $level = $("#level"),
+    $lives = $("#lives"),
+    $toast = $("#toast"),
+    showGameInfo = function () {
+      $score.html(RocknCoder.Game.score);
+      $level.html(RocknCoder.Game.level + 1);
+      $lives.html(RocknCoder.Game.lives);
+    },
+    updateScore = function (points) {
+      RocknCoder.Game.score += points;
+      showGameInfo();
+    },
+    clearGame = function () {
+      $(window).off('click touchstart');
+      clearInterval(RocknCoder.IntervalId);
+      RocknCoder.IntervalId = null;
+      $.mobile.changePage("#attract");
+    };
+
+
   RocknCoder.IntervalId = null;
   /* holds all of the sprites to be displayed on the screen */
   RocknCoder.SpriteMap = {};
@@ -16,6 +37,7 @@ var RocknCoder = RocknCoder || {};
   RocknCoder.Game = {
     level: 0,
     lives: 3,
+    score: 0,
     playing: true,
     spriteSheet: null,
     dims: {}
@@ -61,6 +83,7 @@ var RocknCoder = RocknCoder || {};
     RocknCoder.Game.lives = 3;
     RocknCoder.Game.playing = true;
     RocknCoder.InitExplosion();
+    showGameInfo();
 
     /* this is the actual game loop */
     RocknCoder.IntervalId = setInterval(function () {
@@ -132,11 +155,11 @@ var RocknCoder = RocknCoder || {};
           RocknCoder.Game.playing = true;
           RocknCoder.Game.level += 1;
           init = true;
+          if (!RocknCoder.Levels[RocknCoder.Game.level]) {
+            clearGame();
+          }
         } else {
-          /* stop the timer */
-          clearInterval(RocknCoder.IntervalId);
-          RocknCoder.IntervalId = null;
-          $.mobile.changePage("#attract");
+          clearGame();
         }
       }
     }, 33);
@@ -147,6 +170,11 @@ var RocknCoder = RocknCoder || {};
       lvl = RocknCoder.Levels[gameLevel],
       explodeMe = function (sprite) {
         var map;
+        if (sprite.count === 0) {
+          RocknCoder.playSoundFx(1);
+          updateScore(10 * (RocknCoder.Game.level+1));
+
+        }
         sprite.count += 1;
         if (sprite.count === 7) {
           delete RocknCoder.SpriteMap[sprite.data];
@@ -173,6 +201,14 @@ var RocknCoder = RocknCoder || {};
         },
         flyDown: function (sprite) {
           sprite.yPos += 5;
+          if (sprite.yPos >= RocknCoder.Game.dims.height) {
+            sprite.yPos = -sprite.height;
+          }
+          killMe(sprite);
+        },
+        swoopDown: function (sprite) {
+          sprite.yPos += 5;
+          sprite.xPos = sprite.xOriginalPos + (RocknCoder.GetSine(sprite.yPos * 2) * 40);
           if (sprite.yPos >= RocknCoder.Game.dims.height) {
             sprite.yPos = -sprite.height;
           }
@@ -208,6 +244,7 @@ var RocknCoder = RocknCoder || {};
         sprite.count += 1;
         if (sprite.count === 7) {
           RocknCoder.Game.lives--;
+          showGameInfo();
           if (RocknCoder.Game.lives) {
             sprite.killed = false;
             sprite.moveFunc = moves.toNewPosition;
@@ -254,6 +291,7 @@ var RocknCoder = RocknCoder || {};
     RocknCoder.SpriteMap.gunShip = new Sprite(RocknCoder.SpriteTypes.PLAYER, 5, 401, 64, 64, xPos, yPos, 0, moves.toNewPosition, null);
     player = RocknCoder.SpriteMap.gunShip;
 
+
     /*
      *  the game is playable by touch or mouse
      *  we clear the event first to ensure that we are double handling it
@@ -266,6 +304,7 @@ var RocknCoder = RocknCoder || {};
 
       /* this is an important performance boost */
       event.preventDefault();
+
 
       if (event.type === 'touchstart') {
         x = event.originalEvent.touches[0].pageX;
@@ -283,9 +322,11 @@ var RocknCoder = RocknCoder || {};
           moves.flyBullet,
           bulletName);
         bullet++;
+        RocknCoder.playSoundFx(0);
       }
     });
   });
+
 
   RocknCoder.InitExplosion = (function () {
     RocknCoder.Explosion = {
@@ -306,7 +347,7 @@ var RocknCoder = RocknCoder || {};
   RocknCoder.Levels = {
     0: {
       npcs: [
-        [50, 50, "flyDown"],
+        [50, 50, "swoopDown"],
         [250, 50, "flyDown"],
         [100, 50, "spinAround"],
         [150, 50, "doNothing"]

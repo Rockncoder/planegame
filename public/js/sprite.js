@@ -17,6 +17,8 @@ function Sprite(type, xSprite, ySprite, width, height, xPos, yPos, rotate, moveF
   /* initial screen position of the image */
   this.xPos = xPos;
   this.yPos = yPos;
+  this.xOriginalPos = xPos;
+  this.yOriginalPos = yPos;
   /* the rotation in degrees */
   this.rotate = rotate;
   /* function to call to handle moving this sprite */

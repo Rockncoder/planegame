@@ -29,9 +29,9 @@ var RocknCoder = RocknCoder || {};
         try {
           // Fix up for prefixing
           window.AudioContext = window.AudioContext || window.webkitAudioContext;
-          context = new AudioContext();
+          RocknCoder.context = new AudioContext();
           console.log('Web Audio API is supported in this browser');
-          loaderReady = RocknCoder.loadAudioFiles(context, sounds);
+          loaderReady = RocknCoder.loadAudioFiles(RocknCoder.context, sounds);
         }
         catch (e) {
           console.log('Web Audio API is NOT supported in this browser');
@@ -116,7 +116,7 @@ var RocknCoder = RocknCoder || {};
       pagebeforeshow: function () {
       },
       pagehide: function () {
-        RocknCoder.Game.spriteSheet = null;
+        //RocknCoder.Game.spriteSheet = null;
         if (RocknCoder.IntervalId) {
           clearInterval(RocknCoder.IntervalId);
         }
