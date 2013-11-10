@@ -172,7 +172,7 @@ var RocknCoder = RocknCoder || {};
         var map;
         if (sprite.count === 0) {
           RocknCoder.playSoundFx(1);
-          updateScore(10 * (RocknCoder.Game.level+1));
+          updateScore(10 * (RocknCoder.Game.level + 1));
 
         }
         sprite.count += 1;
@@ -358,6 +358,13 @@ var RocknCoder = RocknCoder || {};
         [50, 50, "flyDown"],
         [100, 50, "spinAround"],
         [150, 50, "flyDown"]
+      ]
+    },
+    2: {
+      npcs: [
+        [50, 50, "swoopDown", 200],
+        [100, 50, "swoopDown", 2000],
+        [150, 50, "swoopDown", 4000]
       ]
     }
   };
