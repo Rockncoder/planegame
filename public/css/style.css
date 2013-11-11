@@ -1,6 +1,7 @@
 body {
     padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    /*font: 34px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+    font-family: 'Allerta Stencil', sans-serif;
 }
 
 a {
@@ -36,6 +37,9 @@ ul {
 
 .game-screen {
     position: relative;
+    font-family: 'Allerta Stencil', sans-serif;
+    font-size: 20pt;
+    text-shadow: 1px 1px 0px #333;
 }
 
 .game-info {
@@ -53,18 +57,19 @@ ul {
 }
 
 .game-toast {
-    position: absolute;
-    top: 200px;
+    position: relative;
+    width: 40%;
+    top: -200px;
     z-index: 100;
     text-align: center;
     margin: 0 auto;
+    background-color: darkgray;
 }
 
 
 #lives {
     float: left;
     text-align: left;
-
 }
 
 #score {

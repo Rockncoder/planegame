@@ -3,7 +3,8 @@ var RocknCoder = RocknCoder || {};
 (function () {
   "use strict";
 
-  var tables = [
+  var sineTable = [
+    // sine, cosine, tangent
     [0, 1, 0],
     [0.0175, 0.9998, 0.0175],
     [0.0349, 0.9994, 0.0349],
@@ -97,12 +98,12 @@ var RocknCoder = RocknCoder || {};
     [1, 0, 0]
   ];
 
-  RocknCoder.GetSine = (function(degree) {
-    degree = degree % 360;
-    var offset = Math.abs(degree % 90),
+  RocknCoder.GetSine = (function(inDegree) {
+    var degree = inDegree % 360,
+      offset = Math.abs(degree % 90),
       sign = degree >= 180? -1: 1,
       index = (degree >= 90 && degree < 180) || (degree >= 270 && degree < 360) ? 1: 0,
-      sine =  tables[offset][index] * sign;
+      sine =  sineTable[offset][index] * sign;
 
     return sine;
   });
